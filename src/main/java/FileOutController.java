@@ -10,23 +10,24 @@ import java.util.ArrayList;
 public class FileOutController {
 
     public static String outputPath;
+    String projectName;
     ArrayList<ArrayList<ParsingNode>> nodeDatas;
     ArrayList<String> paths;
 
-    public FileOutController(ArrayList<ArrayList<ParsingNode>> nodeDatas, ArrayList<String> paths, String outputPath){
+    public FileOutController(ArrayList<ArrayList<ParsingNode>> nodeDatas, ArrayList<String> paths, String outputPath, String projectName){
         this.nodeDatas = nodeDatas;
         this.paths = paths;
         this.outputPath = outputPath;
+        this.projectName = projectName;
 
     }
     //벡터 표현을 받아서 실행
     public void fileOut() throws IOException{
-        FileWriter fw;
         BufferedWriter bw;
 
         try{
             for(int i = 0; i < paths.size(); i++){
-                bw = new BufferedWriter(new FileWriter(outputPath + this.paths.get(i)+".txt"));
+                bw = new BufferedWriter(new FileWriter( outputPath + projectName +"_" + this.paths.get(i)+".txt"));
                 for(int j = 0; j < nodeDatas.get(i).size(); j++){
                     bw.write(nodeDatas.get(i).get(j).getNodeRepresentation());
                     bw.newLine();

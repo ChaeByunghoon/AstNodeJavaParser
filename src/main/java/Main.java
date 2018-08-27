@@ -17,24 +17,29 @@ public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
         ArrayList<String> projectList = new ArrayList<>();
+        ArrayList<String> projectNameList = new ArrayList<>();
 
-        File dirFile = new File("C:/Users/RTSE/Desktop/BugPredictionWork/test/");
+        File dirFile = new File("C:/Users/RTSE/Desktop/source_result/");
         File[] fileList = dirFile.listFiles();
         for(File tempFile : fileList) {
             if(tempFile.isDirectory()) {
                 projectList.add(tempFile.getAbsolutePath());
+                projectNameList.add(tempFile.getName());
             }
         }
-        //System.out.println(projectList.size());
-        /*for (int i = 0; i < projectList.size(); i++){
-            testRevised(projectList.get(i), "C:/Users/RTSE/Desktop/BugPredictionWork/java_output/");
-        }/*/
+        System.out.println(projectList.size());
+        for (int i = 0; i < projectList.size(); i++){
+
+            testRevised(projectList.get(i), "C:/Users/RTSE/Desktop/source_output/", projectNameList.get(i));
+
+        }
+        //7번쨰에 문제 9번쨰 10번쨰도 문제,
         //testRevised(projectList.get(3), "C:/Users/RTSE/Desktop/BugPredictionWork/java_output/");
 
-        printAST(revisedOption, "C:/Users/RTSE/Desktop/BugPredictionWork/test/");
+       // printAST(revisedOption, "C:/Users/RTSE/Desktop/BugPredictionWork/test/");
     }
 
-    private static void testAllTree(String inputPath, String outputPath) throws FileNotFoundException {
+    /*private static void testAllTree(String inputPath, String outputPath) throws FileNotFoundException {
 
         FileController fileController = new FileController(inputPath);
         ParsingController parsingController = new ParsingController(fileController.getPathFileNames());
@@ -48,31 +53,31 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
-    private static void testHandCraftTree(String inputPath, String outputPath) throws FileNotFoundException{
+   /* private static void testHandCraftTree(String inputPath, String outputPath) throws FileNotFoundException{
 
         FileController fileController = new FileController(inputPath);
         ParsingController parsingController = new ParsingController(fileController.getPathFileNames());
         ArrayList<ArrayList<ParsingNode>> parsingNodes = parsingController.parsingNodeByHandCraftStructure();
         parsingController.printHandCraftStructParsingNode();
 
-        FileOutController fileOutController = new FileOutController(parsingNodes, fileController.getFileNames(), outputPath);
+       // FileOutController fileOutController = new FileOutController(parsingNodes, fileController.getFileNames(), outputPath);
 
         try {
-            fileOutController.fileOut();
+           // fileOutController.fileOut();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
 
-    }
-    private static void testRevised(String path, String outputPath) throws FileNotFoundException {
+    }*/
+    private static void testRevised(String path, String outputPath, String projectName) throws FileNotFoundException {
         FileController fileController = new FileController(path);
 
         ParsingController parsingController = new ParsingController(fileController.getPathFileNames());
         ArrayList<ArrayList<ParsingNode>> parsingNodes = parsingController.parsingNodeByRevisedStructure();
-        FileOutController fileOutController = new FileOutController(parsingNodes, fileController.getFileNames(), outputPath);
+        FileOutController fileOutController = new FileOutController(parsingNodes, fileController.getFileNames(), outputPath, projectName);
         try {
             fileOutController.fileOut();
         } catch (IOException e) {
@@ -80,17 +85,17 @@ public class Main {
         }
     }
 
-    private static void testRepresentation(String inputPath, String outputPath) throws FileNotFoundException {
+    /*private static void testRepresentation(String inputPath, String outputPath) throws FileNotFoundException {
         FileController fileController = new FileController(inputPath);
         ParsingController parsingController = new ParsingController(fileController.getPathFileNames());
         ArrayList<ArrayList<ParsingNode>> parsingNodes = parsingController.parsingNodeByRepresentiveTreeStructure();
 
-        FileOutController fileOutController = new FileOutController(parsingNodes, fileController.getFileNames(), outputPath);
+        //FileOutController fileOutController = new FileOutController(parsingNodes, fileController.getFileNames(), outputPath);
 
         parsingController.printRepresentationParsingNode();
 
         try {
-            fileOutController.fileOut();
+          //  fileOutController.fileOut();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -111,7 +116,7 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
     private static void printAST(String option, String path) throws FileNotFoundException{
         FileController fileController = new FileController(path);
         ParsingController ps;

@@ -12,6 +12,7 @@ public class FileController {
     private ArrayList<String> fileNames;
     private ArrayList<String> pathFileNames;
     private String path;
+    public static int filecnt = 0;
 
 
     public FileController(String path){
@@ -42,6 +43,9 @@ public class FileController {
         return this.fileNames;
     }
     public ArrayList<String> getPathFileNames(){
+        System.out.println("프로젝트 별 파일 개수 : " + this.pathFileNames.size());
+        filecnt += this.pathFileNames.size();
+        System.out.println("누적 파일 개수 : " + filecnt);
         return this.pathFileNames;
     }
     public void printFileList(){

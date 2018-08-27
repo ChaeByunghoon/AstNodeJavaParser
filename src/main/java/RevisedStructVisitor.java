@@ -18,21 +18,25 @@ public class RevisedStructVisitor extends VoidVisitorAdapter<Integer> {
 
     public void out(Node n, int indentLevel) {
 
+        //parsingNodes.add(new ParsingNode(n.getClass().getSimpleName(), indentLevel));
         switch (n.getClass().getSimpleName()) {
             case "MethodDeclaration":
-                parsingNodes.add(new ParsingNode(n.getClass().getSimpleName() + "@" + ((MethodDeclaration) n).getNameAsString(), indentLevel));
+                parsingNodes.add(new ParsingNode(n.getClass().getSimpleName() + "@" + splitCamelCase(((MethodDeclaration) n).getNameAsString()), indentLevel));
                 break;
             case "ClassOrInterfaceDeclaration":
-                parsingNodes.add(new ParsingNode(n.getClass().getSimpleName() + "@" + ((ClassOrInterfaceDeclaration) n).getNameAsString(), indentLevel));
+                parsingNodes.add(new ParsingNode(n.getClass().getSimpleName() + "@" + splitCamelCase(((ClassOrInterfaceDeclaration) n).getNameAsString()), indentLevel));
                 break;
             case "MethodCallExpr":
-                parsingNodes.add(new ParsingNode(n.getClass().getSimpleName() + '@' + ((MethodCallExpr) n).asMethodCallExpr().getName(), indentLevel));
+                parsingNodes.add(new ParsingNode(n.getClass().getSimpleName() + '@' + splitCamelCase(((MethodCallExpr) n).asMethodCallExpr().getName().toString()), indentLevel));
                 break;
             case "ConstructorDeclaration":
-                parsingNodes.add(new ParsingNode(n.getClass().getSimpleName() + "@" + ((ConstructorDeclaration) n).getNameAsString(), indentLevel));
+                parsingNodes.add(new ParsingNode(n.getClass().getSimpleName() + "@" + splitCamelCase(((ConstructorDeclaration) n).getNameAsString()), indentLevel));
                 break;
             case "PrimitiveType":
                 parsingNodes.add(new ParsingNode(n.getClass().getSimpleName() + "@" + ((PrimitiveType) n).asString(), indentLevel));
+                break;
+            case "NameExpr":
+                parsingNodes.add(new ParsingNode(n.getClass().getSimpleName() + "@" + splitCamelCase(((NameExpr)n).getNameAsString()), indentLevel));
                 break;
             default:
                 parsingNodes.add(new ParsingNode(n.getClass().getSimpleName(), indentLevel));
@@ -41,11 +45,16 @@ public class RevisedStructVisitor extends VoidVisitorAdapter<Integer> {
         }
 
     }
-
-    /*public static String carmelCaseParsing(String name){
-
-        return
-    }*/
+    static String splitCamelCase(String s) {
+        return s.replaceAll(
+                String.format("%s|%s|%s",
+                        "(?<=[A-Z])(?=[A-Z][a-z])",
+                        "(?<=[^A-Z])(?=[A-Z])",
+                        "(?<=[A-Za-z])(?=[^A-Za-z])"
+                ),
+                ","
+        ).toLowerCase();
+    }
     public ArrayList<ParsingNode> getParsingNodes() {
         return parsingNodes;
     }
@@ -66,7 +75,7 @@ public class RevisedStructVisitor extends VoidVisitorAdapter<Integer> {
     public void visit(PrimitiveType n, Integer arg) {
         out(n, arg);
         super.visit(n, arg + 1);
-        System.out.println("PrimitiveType " + n.asString());
+        //System.out.println("PrimitiveType " + n.asString());
 
     }
 
@@ -122,7 +131,7 @@ public class RevisedStructVisitor extends VoidVisitorAdapter<Integer> {
     public void visit(MethodCallExpr n, Integer arg) {
         out(n, arg);
         super.visit(n, arg + 1);
-        System.out.println("MethodCallExpr" + n.asMethodCallExpr().getName());
+        //System.out.println("MethodCallExpr" + n.asMethodCallExpr().getName());
     }
 
     @Override
@@ -190,7 +199,7 @@ public class RevisedStructVisitor extends VoidVisitorAdapter<Integer> {
     public void visit(VariableDeclarator n, Integer arg) {
         out(n, arg);
         super.visit(n, arg + 1);
-        System.out.println("VariableDelcarator  " + n.getName());
+        //System.out.println("VariableDelcarator  " + n.getName());
 
 
     }
@@ -199,7 +208,7 @@ public class RevisedStructVisitor extends VoidVisitorAdapter<Integer> {
     public void visit(ConstructorDeclaration n, Integer arg) {
         out(n, arg);
         super.visit(n, arg + 1);
-        System.out.println("ConstructorDeclaration" + n.getNameAsString());
+        //System.out.println("ConstructorDeclaration" + n.getNameAsString());
 
 
     }
@@ -229,7 +238,7 @@ public class RevisedStructVisitor extends VoidVisitorAdapter<Integer> {
     public void visit(NameExpr n, Integer arg) {
         out(n, arg);
         super.visit(n, arg + 1);
-        System.out.println("NameExpr" + n.toString());
+       // System.out.println("NameExpr" + n.toString());
     }
 
     @Override
@@ -242,8 +251,8 @@ public class RevisedStructVisitor extends VoidVisitorAdapter<Integer> {
     public void visit(ClassExpr n, Integer arg) {
         out(n, arg);
         super.visit(n, arg + 1);
-        System.out.println("Class Expr  " + n.asClassExpr().asClassExpr().toClassExpr().toString());
-        System.out.println("Class Expr  " + n.getTypeAsString());
+        //System.out.println("Class Expr  " + n.asClassExpr().asClassExpr().toClassExpr().toString());
+       // System.out.println("Class Expr  " + n.getTypeAsString());
     }
 
     @Override
@@ -389,8 +398,8 @@ public class RevisedStructVisitor extends VoidVisitorAdapter<Integer> {
     public void visit(ClassOrInterfaceType n, Integer arg) {
         out(n, arg);
         super.visit(n, arg + 1);
-        System.out.println("ClassOrInterfaceType " + n.asString());
-        
+        //System.out.println("ClassOrInterfaceType " + n.asString());
+
     }
 
     @Override

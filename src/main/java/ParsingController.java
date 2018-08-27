@@ -33,7 +33,7 @@ public class ParsingController {
                 units.add(tempCu);
             }catch (ParseProblemException e){
                 System.out.println("소스코드 파싱 문제 발생. " + filename);
-                units.remove(units.size() - 1);
+                //units.remove(units.size() - 1);
             }
         }
     }
@@ -71,6 +71,7 @@ public class ParsingController {
             rsSelector.visit(cu,0);
             nodeDatas.add(rsSelector.getParsingNodes());
         }
+       // System.out.println("프로젝트별 노드 개수 : " + nodeDatas.size());
         return nodeDatas;
     }
     public ArrayList<ArrayList<ParsingNode>> parsingNodeByFourthStructure(){
