@@ -1,7 +1,12 @@
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ParseProblemException;
 import com.github.javaparser.ast.*;
+import visitor.FourthStructVisitor;
+import visitor.HandCraftStructVisitor;
+import visitor.RepresentationNodeVisitor;
+import visitor.RevisedStructVisitor;
 
+import Node.ParsingNode;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;

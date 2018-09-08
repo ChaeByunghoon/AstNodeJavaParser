@@ -1,3 +1,5 @@
+import Node.ParsingNode;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -43,7 +45,7 @@ public class Main {
 
         FileController fileController = new FileController(inputPath);
         ParsingController parsingController = new ParsingController(fileController.getPathFileNames());
-        ArrayList<ArrayList<ParsingNode>> parsingNodes = parsingController.parsingNodeByFullTreeStructure();
+        ArrayList<ArrayList<Node.ParsingNode>> parsingNodes = parsingController.parsingNodeByFullTreeStructure();
         parsingController.printParsingNode();
 
         FileOutController fileOutController = new FileOutController(parsingNodes, fileController.getFileNames(), outputPath);
@@ -59,7 +61,7 @@ public class Main {
 
         FileController fileController = new FileController(inputPath);
         ParsingController parsingController = new ParsingController(fileController.getPathFileNames());
-        ArrayList<ArrayList<ParsingNode>> parsingNodes = parsingController.parsingNodeByHandCraftStructure();
+        ArrayList<ArrayList<Node.ParsingNode>> parsingNodes = parsingController.parsingNodeByHandCraftStructure();
         parsingController.printHandCraftStructParsingNode();
 
        // FileOutController fileOutController = new FileOutController(parsingNodes, fileController.getFileNames(), outputPath);
@@ -88,7 +90,7 @@ public class Main {
     /*private static void testRepresentation(String inputPath, String outputPath) throws FileNotFoundException {
         FileController fileController = new FileController(inputPath);
         ParsingController parsingController = new ParsingController(fileController.getPathFileNames());
-        ArrayList<ArrayList<ParsingNode>> parsingNodes = parsingController.parsingNodeByRepresentiveTreeStructure();
+        ArrayList<ArrayList<Node.ParsingNode>> parsingNodes = parsingController.parsingNodeByRepresentiveTreeStructure();
 
         //FileOutController fileOutController = new FileOutController(parsingNodes, fileController.getFileNames(), outputPath);
 
@@ -105,7 +107,7 @@ public class Main {
     private static void testFourth(String path,String outputPath) throws FileNotFoundException {
         FileController fileController = new FileController(path);
         ParsingController parsingController = new ParsingController(fileController.getPathFileNames());
-        ArrayList<ArrayList<ParsingNode>> parsingNodes = parsingController.parsingNodeByFourthStructure();
+        ArrayList<ArrayList<Node.ParsingNode>> parsingNodes = parsingController.parsingNodeByFourthStructure();
 
         FileOutController fileOutController = new FileOutController(parsingNodes, fileController.getFileNames(), outputPath);
 

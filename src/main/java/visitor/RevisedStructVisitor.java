@@ -1,9 +1,13 @@
+package visitor;
+
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.body.*;
 import com.github.javaparser.ast.expr.*;
 import com.github.javaparser.ast.stmt.*;
 import com.github.javaparser.ast.type.*;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
+
+import Node.ParsingNode;
 
 import java.util.ArrayList;
 
@@ -18,7 +22,7 @@ public class RevisedStructVisitor extends VoidVisitorAdapter<Integer> {
 
     public void out(Node n, int indentLevel) {
 
-        //parsingNodes.add(new ParsingNode(n.getClass().getSimpleName(), indentLevel));
+        //parsingNodes.add(new Node.ParsingNode(n.getClass().getSimpleName(), indentLevel));
         switch (n.getClass().getSimpleName()) {
             case "MethodDeclaration":
                 parsingNodes.add(new ParsingNode(n.getClass().getSimpleName() + "@" + splitCamelCase(((MethodDeclaration) n).getNameAsString()), indentLevel));

@@ -1,3 +1,5 @@
+package visitor;
+
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.body.*;
 import com.github.javaparser.ast.expr.*;
@@ -6,11 +8,9 @@ import com.github.javaparser.ast.type.PrimitiveType;
 import com.github.javaparser.ast.type.TypeParameter;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
-import java.util.ArrayList;
+import Node.ParsingNode;
 
-/**
- * Created by chaebyeonghun on 2018. 2. 25..
- */
+import java.util.ArrayList;
 // 1번논문에 사용된 대표 노드들을 visit하는 visitor
 public class RepresentationNodeVisitor extends VoidVisitorAdapter<Integer> {
 
